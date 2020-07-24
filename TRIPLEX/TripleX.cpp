@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+
 
 void PrintIntroduction(int Difficulty){
    std::cout <<"   //   \n";
@@ -18,9 +20,9 @@ bool PlayGame(int Difficulty)
 {
    PrintIntroduction(Difficulty);
 
-   int CodeA = 4;
-   int CodeB = 3;
-   int CodeC = 7;
+   int CodeA = rand() % Difficulty + Difficulty;
+   int CodeB = rand() % Difficulty + Difficulty;
+   int CodeC = rand() % Difficulty + Difficulty;
 
    int CodeSum = CodeA + CodeB + CodeC;
    int CodeProduct = CodeA * CodeB * CodeC;
@@ -54,15 +56,21 @@ bool PlayGame(int Difficulty)
 
 int main()
 {
-   int LevelDifficulty = 1;
-   while (true){
-      bool bLevelComplete = PlayGame(LevelDifficulty);
-      std::cin.clear(); // Clears errors
-      std::cin.ignore(); //Discards the buffer
+   srand(time(NULL));//Create new random sequence based on time of day
 
-      if (bLevelComplete) {
-         ++LevelDifficulty;
-      }
+   int LevelDifficulty = 1;
+   int const MaxDifficulty =5;
+   while (LevelDifficulty <= MaxDifficulty){ // Until leveles are complete
+      std::cout << rand() << "\n";
+
+
+       bool bLevelComplete = PlayGame(LevelDifficulty);
+       std::cin.clear(); // Clears errors
+       std::cin.ignore(); //Discards the buffer
+
+       if (bLevelComplete) {
+          ++LevelDifficulty;
+       }
    }
    return 0;
 }
